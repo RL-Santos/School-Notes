@@ -66,7 +66,7 @@ used for network discovery and security auditing
 `nmap -h or nmap --help`
   - there are many commands so just incase this outputs all possible things I can do 
 
-
+---
 
 Source:
 https://www.freecodecamp.org/news/what-is-nmap-and-how-to-use-it-a-tutorial-for-the-greatest-scanning-tool-of-all-time/
