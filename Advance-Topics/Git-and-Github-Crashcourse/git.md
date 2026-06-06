@@ -39,7 +39,14 @@ Git has 2 main parts:
 
 ## Commands:
 `git clone <github url>` - this clone the whole specified github repo into your selected folder
-`git status` - shows summary of everything. What has changed, which files are new, and which files are modified.
+`git status` - shows summary of everything. What has changed, which files are new, and which files are modified.  
+`git add <file name>` - adds a specific file to the **Stage** part of git and prepares it for the next commit. This is called Stages or Staged  
+`git add -A` or `git add --all` - also stages the file but instead of only one it stages all at the same time  
+`git add .` - this also stages files but only everything inside my current directory instead of the whole project  
+`git add *` - stages only all new or modified files and not including the deleted ones  
+`git add *.txt` - this stages every .txt file, but still excluding the delete ones. You can use any file extension here.  
+`git reset` - this resets all you did even if they are staged  
+`git reset HEAD~` - this will undo the last commit and bring everything in working directory
 
 
 ---
