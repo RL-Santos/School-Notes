@@ -66,14 +66,25 @@ For example, the original default permission of a file is *666* and the umask is
 
 
 ## Access Control Lists (ACLs)
-this is used if you want to give a specific user a specific permission.
+this is used if you want to give a specific user a specific permission. In the table below explains what each letter does and just go to **Commands** below to elaborate more
 
 | Entry Type | What it modifies    |
 |:----------:|:-------------------:|
 | u or user  | Specific user       |
 | g or group | Specific group      |
-| m or mask  |  |
+| m or mask  | Maximum permission  |
 | o or other | Other User          |
+
+Example command is `setfacl -m g:user-group:rw <file name>` - this modifies the **user-group**'s permission to read and write in the file specified. But now if you remove the user it becomes `setfacl -m g::rw <file name>`, this now modifies every group that can access it not just a specific one.
+
+## How Do Linux Evaluates Permissions?
+Linux doesn't just check it all at the same time it checks it like an if-ifelse-else statement. Basically it asks,
+
+1. **Is it the Owner?**, if yes then give owner permission
+2. **Has an ACL user entry?**, if yes then give ACL user permission
+3. **Is in Group?**, if yes then give group permission
+4. **Has an ACL group entry?**, if yes then give ACL group permission
+5. **If none of those?**, then give others permission
 
 ## Commands:
 there are 3 basic commands used to determine the permission of a file and to modify them
@@ -93,14 +104,20 @@ there are 3 basic commands used to determine the permission of a file and to mod
 
 ---
 
-`chgrp ubuntu-group <file name>` - this means you are now changing only the group that can access the file   
+`chgrp ubuntu-group <file name>` - this means you are now changing only the group that can access the file
 
 ---
 
-`umask 0022` - this changes the umask value to 0022  
+`umask 0022` - this changes the umask value to 0022
 
 ---
 
+`setfacl -m u:user:rw <file name>` - this modifies the **user**'s permission to read and write in the file specified  
+`setfacl -m g:user-group:rw <file name>` - this modifies the **user-group**'s permission to read and write in the file specified  
+`setfacl -m m::rw <file name>` - this modifies the everyone that can access this file to read and write as their maximum permission. But everyone who doesn't have a read or write will not gain permission
+`setfacl -m o::rw <file name>` - this modifies everyone in the **others** category to read and write in the file specified  
+`setfacl -x u:user:rw <file or directory>` - this removes the **user**'s permission to read and write in the file specified. You can also use the `-x` command to remove other permission not just users  
+`setfacl -R -m u:user:rw <file name>` - this modifies the **user**'s permission to read and write but now everything inside the file or directory will also change not just this file  
 
 
 ## Source
