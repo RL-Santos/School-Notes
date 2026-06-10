@@ -1,5 +1,5 @@
 # File Permissions
-This will include a lot of topic including chmod, unmask and ACLs
+This will include a lot of topic including chmod, umask and ACLs
 
 ### Basic Permissions
 - **Read (r)**, allows you to view contents of a file
@@ -50,6 +50,31 @@ there are special permission that will do their own thing not just rwx
 
 To remove these permissions, you just need to replace the `+` to `-` for example, `chmod ubuntu-s files.txt`. This removes the SUID permission to files.txt
 
+## Default Permissions and UMASK
+The default permission for ***files*** is 666 and 777 for ***directories***. But this is not always the case, because we have what we call **umask** which basically overrides all default permission depending on its value.
+
+The umask I have in my laptop is `0002` which is usually used for shared systems. Each number correspond to a specific permission. 
+
+| Position | What it modifies    |
+|:--------:|:-------------------:|
+| First    | Special Permissions |
+| Second   | Owner               |
+| Third    | Group               |
+| Fourth   | Other User          |
+
+For example, the original default permission of a file is *666* and the umask is *0022*. Now the default permission whenever you make a file whenever you make one will be *644*. Whenever you change the umask it doesn't subtract from the default permission, it subtracts from the original which is 666 for files and 777 for directories. 
+
+
+## Access Control Lists (ACLs)
+this is used if you want to give a specific user a specific permission.
+
+| Entry Type | What it modifies    |
+|:----------:|:-------------------:|
+| u or user  | Specific user       |
+| g or group | Specific group      |
+| m or mask  |  |
+| o or other | Other User          |
+
 ## Commands:
 there are 3 basic commands used to determine the permission of a file and to modify them
 
@@ -60,10 +85,21 @@ there are 3 basic commands used to determine the permission of a file and to mod
 ### Examples:
 `chmod 755 <file name>` - this command gives this permission `rwxr-xr-x`, which means owner can read, write and execute but group and others can only read and execute. This is usually used for executable files or directories  
 `chmod 777 <file name>` - this now gives the highest permission to everyone `rwxrwxrwx`, this can pose as security risk on a shared systems  
+
+--- 
+
 `chown ubuntu <file name>` - this means you are changing the owner of the specified file to ubuntu  
 `chown ubuntu:ubuntu-group <file name>` - this command now change both the owner and the group associated with it  
-`chgrp ubuntu-group <file name>` - this means you are now changing only the group that can access the file
 
+---
+
+`chgrp ubuntu-group <file name>` - this means you are now changing only the group that can access the file   
+
+---
+
+`umask 0022` - this changes the umask value to 0022  
+
+---
 
 
 
