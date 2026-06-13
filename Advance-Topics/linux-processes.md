@@ -18,7 +18,14 @@ These days it is not used anymore, But a new one is still being used by linux wh
 
 Virtual TTYS or Teletypewriter concept is still used by linux which is what we call terminal now. It is not entirely the same but the concept is the same. Anything that the user start to process will show up if you use `ps a` but only using `ps x` will you see hidden background processes that you the user didn't and those are not connected to any TTYS.
 
+### What is a Thread?
+Thread is like a mini sub task, bascially a process inside a process. If you open task manager in windows you can see a process there like Chrome, there is an arrow besides it and if you click it there is a bunch of chromes again and those are threads.
+
+A process sometimes can't handle it all in just one go. So they make a thread to help them process things faster. They all share the same processing memory but they execute tasks simultaneously
+
 ## Common Command Output Breakdown
+Output of each command may vary but this is output from `ps aux` and you can see every common processes name here
+
 | USER   | PID  | %CPU | %MEM | VSZ    | RSS   | TTY   | STAT | START | TIME | COMMAND    |
 |:-------|:-----|:-----|:-----|:-------|:------|:------|:-----|:------|:-----|:-----------|
 | root   | 1    | 0.0  | 0.1  | 168244 | 11728 | ?     | Ss   | Oct02 | 0:04 | /sbin/init |
@@ -52,7 +59,39 @@ Virtual TTYS or Teletypewriter concept is still used by linux which is what we c
 
 ---
 
-`top` - this shows all processes in a real-time view
+`top` - this shows all processes in a real-time view  
+`top -u <username>` - this shows all processes owned by the username you specified  
+`sudo top -o <field name>` - this sorts processes by fields like %CPU or %MEM.  
+`sudo top -o +<field name>` - this sorts processes by fields and orders them high to low  
+`sudo top -o -<field name>` - this sorts processes by fields and orders them low to high  
+`sudo top -O` - this lists all fields  
+`sudo top -Hp <process id>` - this shows process with the process id you specified  
+`sudo top -p $(pgrep -d ',' <process name>)` - this shows processes based on the name you specified  
+`top -b -n1 > /tmp/<file name>.log` - this saves the processes into a file
+
+---
+
+`pstree` - this shows all processes using tree type hierarchy  
+
+`ps -ejH` - this shows processes exactly how linux handles it so its built for system auditing and scripting  
+- `-e` - this shows every process
+- `-j` - this uses jobs format, which adds columns like PPID, PGID, and SID
+- `-H` - this organizes all processes into a hierarchy
+
+`ps axjf` - this shows processes in a tree like structure and is built for human eyes because it is a visual map
+- `a` & `x` - this shows every processes including the background processes
+- `j` - this uses jobs format, which adds columns like PPID, PGID, and SID
+- `f` - thos formats the output into ASCII art forest which is a tree structure like
+
+`ps -eLf` - this shows every single process and thread on the system in a flat, detailed list
+- `-e` - this shows every process
+- `-L` - this shows Lightweight Processes which is a technical term for threads
+- `-f` - this makes full-format listing which gives more columns
+
+`ps axms` - this shows every single process and threads too but it groups it so its more visually easy to understand
+- `a` & `x` - this shows every processes including the background processes
+- `m` - this shows the threads and nests it so its more visually appealing
+- `s` - this formats the output into signal-related output and performance
 
 
 ## Source
