@@ -11,6 +11,13 @@ this notes will include commands about ps, top, htop, atop and more.
 
 ---
 
+### What is Daemons?
+Daemons or Demons is a computer program that runs entirely in the background without the user starting this process. You can see this usually if you run `ps aux` or `ps axjk`. These processes tirelessly performing automated tasks without the user telling them to do anything they just start it on their own.
+
+If you use the command `ps aux` you can see these daemons by looking at the TTYS column and looking for values `?`. They show that because when the computer boots up, they are not attached to any monitor or any keyboard.
+
+One of the most common daemon you will see is `systemd`, this has the PID of 1 means its the first one to load whenever your device boot. Its entire job is to launch and manage all other daemon in the background.
+
 ### What is TTYS?
 TTYS or Teletypewriter is a way of communicating with the computer before we have graphical interface. It is a mechnical typewriter connected to the computer and the computer reponds to you in a piece of paper.
 
@@ -63,10 +70,11 @@ Output of each command may vary but this is output from `ps aux` and you can see
 - **COMMAND** - this is the command that started the process
 
 ## Commands
-`ps a` - this shows all processes   
-`ps u` - this shows all processes but also specify whose user is it  
-`ps x` - this forces the machine to show all processes even those that are not started by users  
 `ps aux` - this combines all 3 of them to show you everything that is being processesd and you can also see which users is which  
+- `ps a` - this shows all processes   
+- `ps u` - this shows all processes but also specify whose user is it  
+- `ps x` - this forces the machine to show all processes even those that are not started by users  
+
 `ps -A` or `ps -e` - this both command do the same thing, this is more minimalist way to show all processes  
 `ps -e | grep 'mysqld'` - this shows all processes with 'mysqld' in it  
 `ps -e | grep -E  'firefox|chrome'` - this shows all the processes with 'firefox' or 'chrome' in it  
@@ -112,11 +120,6 @@ Output of each command may vary but this is output from `ps aux` and you can see
 
 `pgrep <process name>` - this shows all process id with the process name specified  
 `pgrep -u root sshd` - this shows process called sshd which is owned by root
-
----
-
-`htop` - this is 
-
 
 ## Source
 https://www.cyberciti.biz/faq/show-all-running-processes-in-linux/
