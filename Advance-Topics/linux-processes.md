@@ -23,6 +23,21 @@ Thread is like a mini sub task, bascially a process inside a process. If you ope
 
 A process sometimes can't handle it all in just one go. So they make a thread to help them process things faster. They all share the same processing memory but they execute tasks simultaneously
 
+### What is atop and htop?
+Both atop and htop are interactive real-time system monitor. This helps you to see what is hapenning in your pc in real time.
+
+- **atop** - this is more detailed system monitor, this shows you everything that is happening as well as what happened few days ago. This can read log files from days ago to show you what happened and what went wrong.
+
+- **htop** - this is more visually appealing system monitor, this shows you everything that is happening but it will not say what happened days ago just what is happening real-time. This has more clean layout and clickable menu buttons which makes this more user friendly just like task manager from windows.
+
+| Feature            | htop                                                        | atop                                                                  |   |   |
+|--------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|---|---|
+| Primary Use Case   | Quick checks, closing stuck apps, checking current RAM/CPU. | Deep debugging, historical crash analysis, tracking disk bottlenecks. |   |   |
+| Visual Appeal      | High (Clean layout, color bars, easy to read).              | Low (Raw text grid, dense information overload).                      |   |   |
+| Mouse Support      | Yes (You can click menus and columns).                      | No (Strictly keyboard shortcuts).                                     |   |   |
+| Time Travel        | No (Real-time only).                                        | Yes (Can read log files from days ago).                               |   |   |
+| Disk/Network Track | Basic.                                                      | Advanced (Shows per-process read/write speeds).                       |   |   |
+
 ## Common Command Output Breakdown
 Output of each command may vary but this is output from `ps aux` and you can see every common processes name here
 
@@ -92,6 +107,15 @@ Output of each command may vary but this is output from `ps aux` and you can see
 - `a` & `x` - this shows every processes including the background processes
 - `m` - this shows the threads and nests it so its more visually appealing
 - `s` - this formats the output into signal-related output and performance
+
+---
+
+`pgrep <process name>` - this shows all process id with the process name specified  
+`pgrep -u root sshd` - this shows process called sshd which is owned by root
+
+---
+
+`htop` - this is 
 
 
 ## Source
